@@ -6,16 +6,43 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Example brunch application</title>
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+  <title>My Pizza Orders</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="styles/app.css">
   <script src="scripts/app.js"></script>
   <script>require('initialize');</script>
 </head>
 <body>
-  <div id="main">
-  	<div id="head"></div>
-  	<div id="content"></div>
+  <div id="viewporter">
+  	<div id="head">
+      <div id="menuButton">M</div>
+      <h1>My Pizza App</h1>
+      <div id="addNewOrder"><a class="btn primary"><span class="icon-user"></span> +</a></div>
+    </div>
+  	<div id="content">
+      <div class="order row">
+        <div class="span4 center">&nbsp;</div>
+        <div class="span1 center">Meat</div>
+        <div class="span1 center">Mushrooms</div>
+        <div class="span1 center">Peppers</div>
+        <div class="span1 center">Olives</div>
+      </div>
+      <div class="order row">
+        <div class="span4"><input placeholder="Name"> </div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+      </div>
+      <div class="order row">
+        <div class="span4"><input placeholder="Name"> </div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+        <div class="span1"><input type="checkbox"></div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
