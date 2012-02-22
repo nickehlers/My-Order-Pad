@@ -13281,7 +13281,9 @@ viewporter.profiles = {
       '': 'home'
     };
 
-    MainRouter.prototype.home = function() {};
+    MainRouter.prototype.home = function() {
+      return $('body').html(app.homeView.render().el);
+    };
 
     return MainRouter;
 
@@ -13406,7 +13408,7 @@ viewporter.profiles = {
     };
     (function() {
     
-      _print(_safe('<!-- START you can remove this -->\n<div id="content">\n  <h1>brunch</h1>\n  <h2>Welcome!</h2>\n  <ul>\n    <li><a href="http://brunch.io/#documentation">Documentation</a></li>\n    <li><a href="https://github.com/brunch/brunch/issues">Github Issues</a></li>\n    <li><a href="https://github.com/brunch/example-todos">Todos Example App</a></li>\n  </ul>\n</div>\n<!-- END you can remove this -->\n'));
+      _print(_safe(' <div id="viewporter">\n  \t<div id="head">\n      <div id="menuButton">M</div>\n      <h1>My Pizza App</h1>\n      <div id="addNewOrder"><a class="btn primary"><span class="icon-user"></span>+</a></div>\n    </div>\n  \t<div id="content">\n      <div class="order row">\n        <div class="span4 center">&nbsp;</div>\n        <div class="span1 center">Meat</div>\n        <div class="span1 center">Mushrooms</div>\n        <div class="span1 center">Peppers</div>\n        <div class="span1 center">Olives</div>\n      </div>\n      <div class="order row">\n        <div class="span4"><input placeholder="Name"> </div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n      </div>\n      <div class="order row">\n        <div class="span4"><input placeholder="Name"> </div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n      </div>\n    </div>\n  </div>'));
     
     }).call(this);
     
