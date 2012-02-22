@@ -11,6 +11,7 @@ div#viewporter
   height: 100%
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden
   
 div#head
   background-color: #333
@@ -27,6 +28,8 @@ div#head
 div#content
   background-color: #ccc
   -webkit-box-flex: 1;
+  -webkit-overflow-scrolling:touch;
+  overflow:auto;
 
 .center
   display: block;
