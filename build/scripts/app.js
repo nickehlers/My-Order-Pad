@@ -13264,65 +13264,6 @@ viewporter.profiles = {
   })
 
 }( window.jQuery );(this.require.define({
-  "routers/main_router": function(exports, require, module) {
-    (function() {
-  var __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  exports.MainRouter = (function(_super) {
-
-    __extends(MainRouter, _super);
-
-    function MainRouter() {
-      MainRouter.__super__.constructor.apply(this, arguments);
-    }
-
-    MainRouter.prototype.routes = {
-      '': 'home'
-    };
-
-    MainRouter.prototype.home = function() {
-      return $('body').html(app.homeView.render().el);
-    };
-
-    return MainRouter;
-
-  })(Backbone.Router);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "views/home_view": function(exports, require, module) {
-    (function() {
-  var __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  exports.HomeView = (function(_super) {
-
-    __extends(HomeView, _super);
-
-    function HomeView() {
-      HomeView.__super__.constructor.apply(this, arguments);
-    }
-
-    HomeView.prototype.id = 'home-view';
-
-    HomeView.prototype.render = function() {
-      $(this.el).html(require('./templates/home'));
-      return this;
-    };
-
-    return HomeView;
-
-  })(Backbone.View);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
   "helpers": function(exports, require, module) {
     (function() {
 
@@ -13349,39 +13290,222 @@ viewporter.profiles = {
   }
 }));
 (this.require.define({
-  "initialize": function(exports, require, module) {
+  "views/templates/menu": function(exports, require, module) {
+    module.exports = function(__obj) {
+  var _safe = function(value) {
+    if (typeof value === 'undefined' && value == null)
+      value = '';
+    var result = new String(value);
+    result.ecoSafe = true;
+    return result;
+  };
+  return (function() {
+    var __out = [], __self = this, _print = function(value) {
+      if (typeof value !== 'undefined' && value != null)
+        __out.push(value.ecoSafe ? value : __self.escape(value));
+    }, _capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return _safe(result);
+    };
     (function() {
-  var BrunchApplication, HomeView, MainRouter,
-    __hasProp = Object.prototype.hasOwnProperty,
+    
+      _print(_safe('<div id="menuButton">M</div>\n<h1>My Pizza App</h1>\n<div id="addNewOrder"><a class="btn primary"><span class="icon-user"></span>+</a></div>'));
+    
+    }).call(this);
+    
+    return __out.join('');
+  }).call((function() {
+    var obj = {
+      escape: function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      },
+      safe: _safe
+    }, key;
+    for (key in __obj) obj[key] = __obj[key];
+    return obj;
+  })());
+};
+  }
+}));
+(this.require.define({
+  "routers/main_router": function(exports, require, module) {
+    (function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  BrunchApplication = require('helpers').BrunchApplication;
+  exports.MainRouter = (function(_super) {
 
-  MainRouter = require('routers/main_router').MainRouter;
+    __extends(MainRouter, _super);
 
-  HomeView = require('views/home_view').HomeView;
-
-  exports.Application = (function(_super) {
-
-    __extends(Application, _super);
-
-    function Application() {
-      Application.__super__.constructor.apply(this, arguments);
+    function MainRouter() {
+      MainRouter.__super__.constructor.apply(this, arguments);
     }
 
-    Application.prototype.initialize = function() {
-      this.router = new MainRouter;
-      return this.homeView = new HomeView;
+    MainRouter.prototype.routes = {
+      '': 'home'
     };
 
-    return Application;
+    MainRouter.prototype.home = function() {
+      $('body').html(app.homeView.render().el);
+      $('#viewporter').append(app.menuView.render().el);
+      return $('#viewporter').append(app.contentView.render().el);
+    };
 
-  })(BrunchApplication);
+    return MainRouter;
 
-  window.app = new exports.Application;
+  })(Backbone.Router);
 
 }).call(this);
 
+  }
+}));
+(this.require.define({
+  "views/content": function(exports, require, module) {
+    (function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  exports.ContentView = (function(_super) {
+
+    __extends(ContentView, _super);
+
+    function ContentView() {
+      ContentView.__super__.constructor.apply(this, arguments);
+    }
+
+    ContentView.prototype.id = 'content';
+
+    ContentView.prototype.render = function() {
+      $(this.el).html(require('./templates/content'));
+      return this;
+    };
+
+    return ContentView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/home_view": function(exports, require, module) {
+    (function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  exports.HomeView = (function(_super) {
+
+    __extends(HomeView, _super);
+
+    function HomeView() {
+      HomeView.__super__.constructor.apply(this, arguments);
+    }
+
+    HomeView.prototype.id = 'viewporter';
+
+    HomeView.prototype.render = function() {
+      $(this.el).html(require('./templates/home'));
+      return this;
+    };
+
+    return HomeView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/menu": function(exports, require, module) {
+    (function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  exports.MenuView = (function(_super) {
+
+    __extends(MenuView, _super);
+
+    function MenuView() {
+      MenuView.__super__.constructor.apply(this, arguments);
+    }
+
+    MenuView.prototype.id = 'head';
+
+    MenuView.prototype.events = {
+      "click #addNewOrder": "onAddClick"
+    };
+
+    MenuView.prototype.render = function() {
+      $(this.el).html(require('./templates/menu'));
+      return this;
+    };
+
+    MenuView.prototype.onAddClick = function() {
+      return console.log('add was clicked', new Date());
+    };
+
+    return MenuView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/templates/content": function(exports, require, module) {
+    module.exports = function(__obj) {
+  var _safe = function(value) {
+    if (typeof value === 'undefined' && value == null)
+      value = '';
+    var result = new String(value);
+    result.ecoSafe = true;
+    return result;
+  };
+  return (function() {
+    var __out = [], __self = this, _print = function(value) {
+      if (typeof value !== 'undefined' && value != null)
+        __out.push(value.ecoSafe ? value : __self.escape(value));
+    }, _capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return _safe(result);
+    };
+    (function() {
+    
+      _print(_safe('<div class="order row-fluid">\n  <div class="span5 center">&nbsp;</div>\n  <div class="span1 center">Meat</div>\n  <div class="span2 center">Mushrooms</div>\n  <div class="span2 center">Peppers</div>\n  <div class="span1 center">Olives</div>\n</div>\n<div class="order row-fluid">\n  <div class="span5"><input placeholder="Name" style="width:100%"> </div>\n  <div class="span1"><input type="checkbox"></div>\n  <div class="span2"><input type="checkbox"></div>\n  <div class="span2"><input type="checkbox"></div>\n  <div class="span1"><input type="checkbox"></div>\n</div>\n<div class="order row-fluid">\n  <div class="span5"><input placeholder="Name" style="width:100%"> </div>\n  <div class="span1"><input type="checkbox"></div>\n  <div class="span2"><input type="checkbox"></div>\n  <div class="span2"><input type="checkbox"></div>\n  <div class="span1"><input type="checkbox"></div>\n</div>'));
+    
+    }).call(this);
+    
+    return __out.join('');
+  }).call((function() {
+    var obj = {
+      escape: function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      },
+      safe: _safe
+    }, key;
+    for (key in __obj) obj[key] = __obj[key];
+    return obj;
+  })());
+};
   }
 }));
 (this.require.define({
@@ -13408,7 +13532,7 @@ viewporter.profiles = {
     };
     (function() {
     
-      _print(_safe(' <div id="viewporter">\n  \t<div id="head">\n      <div id="menuButton">M</div>\n      <h1>My Pizza App</h1>\n      <div id="addNewOrder"><a class="btn primary"><span class="icon-user"></span>+</a></div>\n    </div>\n  \t<div id="content">\n      <div class="order row-fluid">\n        <div class="span5 center">&nbsp;</div>\n        <div class="span1 center">Meat</div>\n        <div class="span2 center">Mushrooms</div>\n        <div class="span2 center">Peppers</div>\n        <div class="span1 center">Olives</div>\n      </div>\n      <div class="order row-fluid">\n        <div class="span5"><input placeholder="Name" style="width:100%"> </div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span2"><input type="checkbox"></div>\n        <div class="span2"><input type="checkbox"></div>\n        <div class="span1"><input type="checkbox"></div>\n      </div>\n      <div class="order row-fluid">\n        <div class="span5"><input placeholder="Name" style="width:100%"> </div>\n        <div class="span1"><input type="checkbox"></div>\n        <div class="span2"><input type="checkbox"></div>\n        <div class="span2"><input type="checkbox"></div>`\n        <div class="span1"><input type="checkbox"></div>\n      </div>\n    </div>\n  </div>'));
+    
     
     }).call(this);
     
@@ -13428,5 +13552,47 @@ viewporter.profiles = {
     return obj;
   })());
 };
+  }
+}));
+(this.require.define({
+  "initialize": function(exports, require, module) {
+    (function() {
+  var BrunchApplication, ContentView, HomeView, MainRouter, MenuView,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  BrunchApplication = require('helpers').BrunchApplication;
+
+  MainRouter = require('routers/main_router').MainRouter;
+
+  HomeView = require('views/home_view').HomeView;
+
+  MenuView = require('views/menu').MenuView;
+
+  ContentView = require('views/content').ContentView;
+
+  exports.Application = (function(_super) {
+
+    __extends(Application, _super);
+
+    function Application() {
+      Application.__super__.constructor.apply(this, arguments);
+    }
+
+    Application.prototype.initialize = function() {
+      this.router = new MainRouter;
+      this.homeView = new HomeView;
+      this.contentView = new ContentView;
+      return this.menuView = new MenuView;
+    };
+
+    return Application;
+
+  })(BrunchApplication);
+
+  window.app = new exports.Application;
+
+}).call(this);
+
   }
 }));

@@ -1,5 +1,5 @@
 class exports.HomeView extends Backbone.View
-  id: 'home-view'
+  id: 'viewporter'
 
   render: ->
     $(@el).html require('./templates/home')
