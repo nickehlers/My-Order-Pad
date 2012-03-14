@@ -4077,8 +4077,8 @@ a.thumbnail:hover {
 }
 html,body{height:100%;width:100%;margin:0;padding:0}
 div#viewporter{width:100%;height:100%;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
-div#head{background-color:#333;color:#fff;height:50px;display:-webkit-box;-webkit-box-orient:horizontal;}
-div#head h1{-webkit-box-flex:1;padding:0;margin:0;text-align:center}
+div#head{background-color:#333;height:50px;display:-webkit-box;-webkit-box-orient:horizontal;}
+div#head h1{-webkit-box-flex:1;padding:0;margin:0;text-align:center;color:#fff}
 div#content{background-color:#ccc;-webkit-box-flex:1;-webkit-overflow-scrolling:touch;overflow:auto}
 .center{display:block;text-align:center}
 div.order input[type="checkbox"]{margin:0 auto;display:block}

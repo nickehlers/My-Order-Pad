@@ -1,0 +1,6 @@
+ <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>
+<div class="span1"><input type="checkbox" name="meat"></div>
+<div class="span2"><input type="checkbox" name="mushrooms"></div>
+<div class="span2"><input type="checkbox" name="peppers"></div>
+<div class="span1"><input type="checkbox" name="olives"></div>
+<div class="span1"><a  href="#" class="remove">-</a></div>
