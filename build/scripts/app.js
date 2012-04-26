@@ -13264,6 +13264,81 @@ viewporter.profiles = {
   })
 
 }( window.jQuery );(this.require.define({
+  "models/OrderModel": function(exports, require, module) {
+    (function() {
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  exports.OrderModel = (function(_super) {
+
+    __extends(OrderModel, _super);
+
+    function OrderModel() {
+      OrderModel.__super__.constructor.apply(this, arguments);
+    }
+
+    return OrderModel;
+
+  })(Backbone.Model);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
+  "views/MenuView": function(exports, require, module) {
+    (function() {
+  var OrderModel,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  OrderModel = require('models/OrderModel').OrderModel;
+
+  exports.MenuView = (function(_super) {
+
+    __extends(MenuView, _super);
+
+    function MenuView() {
+      this.initialize = __bind(this.initialize, this);
+      MenuView.__super__.constructor.apply(this, arguments);
+    }
+
+    MenuView.prototype.id = 'head';
+
+    MenuView.prototype.events = {
+      "click #addNewOrder": "onAddClick"
+    };
+
+    MenuView.prototype.initialize = function(title, tooltip) {
+      this.template = require('./templates/menu');
+      this.title = title;
+      return this.tooltip = tooltip;
+    };
+
+    MenuView.prototype.render = function() {
+      $(this.el).html(this.template({
+        title: this.title,
+        tooltip: this.tooltip
+      }));
+      return this;
+    };
+
+    MenuView.prototype.onAddClick = function() {
+      var m;
+      m = new OrderModel;
+      return app.orders.add(m);
+    };
+
+    return MenuView;
+
+  })(Backbone.View);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "views/OrderView": function(exports, require, module) {
     (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -13327,32 +13402,6 @@ viewporter.profiles = {
     return OrderView;
 
   })(Backbone.View);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "helpers": function(exports, require, module) {
-    (function() {
-
-  exports.BrunchApplication = (function() {
-
-    function BrunchApplication() {
-      var _this = this;
-      jQuery(function() {
-        _this.initialize(_this);
-        return Backbone.history.start();
-      });
-    }
-
-    BrunchApplication.prototype.initialize = function() {
-      return null;
-    };
-
-    return BrunchApplication;
-
-  })();
 
 }).call(this);
 
@@ -13494,6 +13543,33 @@ viewporter.profiles = {
   }
 }));
 (this.require.define({
+  "collections/OrderCollection": function(exports, require, module) {
+    (function() {
+  var OrderModel,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  OrderModel = require('models/OrderModel').OrderModel;
+
+  exports.OrderCollection = (function(_super) {
+
+    __extends(OrderCollection, _super);
+
+    function OrderCollection() {
+      OrderCollection.__super__.constructor.apply(this, arguments);
+    }
+
+    OrderCollection.prototype.model = OrderModel;
+
+    return OrderCollection;
+
+  })(Backbone.Collection);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "views/HomeView": function(exports, require, module) {
     (function() {
   var ContentView, MenuView,
@@ -13539,56 +13615,49 @@ viewporter.profiles = {
   }
 }));
 (this.require.define({
-  "views/MenuView": function(exports, require, module) {
+  "views/templates/home": function(exports, require, module) {
+    module.exports = function(__obj) {
+  var _safe = function(value) {
+    if (typeof value === 'undefined' && value == null)
+      value = '';
+    var result = new String(value);
+    result.ecoSafe = true;
+    return result;
+  };
+  return (function() {
+    var __out = [], __self = this, _print = function(value) {
+      if (typeof value !== 'undefined' && value != null)
+        __out.push(value.ecoSafe ? value : __self.escape(value));
+    }, _capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return _safe(result);
+    };
     (function() {
-  var OrderModel,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  OrderModel = require('models/OrderModel').OrderModel;
-
-  exports.MenuView = (function(_super) {
-
-    __extends(MenuView, _super);
-
-    function MenuView() {
-      this.initialize = __bind(this.initialize, this);
-      MenuView.__super__.constructor.apply(this, arguments);
-    }
-
-    MenuView.prototype.id = 'head';
-
-    MenuView.prototype.events = {
-      "click #addNewOrder": "onAddClick"
-    };
-
-    MenuView.prototype.initialize = function(title, tooltip) {
-      this.template = require('./templates/menu');
-      this.title = title;
-      return this.tooltip = tooltip;
-    };
-
-    MenuView.prototype.render = function() {
-      $(this.el).html(this.template({
-        title: this.title,
-        tooltip: this.tooltip
-      }));
-      return this;
-    };
-
-    MenuView.prototype.onAddClick = function() {
-      var m;
-      m = new OrderModel;
-      return app.orders.add(m);
-    };
-
-    return MenuView;
-
-  })(Backbone.View);
-
-}).call(this);
-
+    
+    
+    
+    }).call(this);
+    
+    return __out.join('');
+  }).call((function() {
+    var obj = {
+      escape: function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      },
+      safe: _safe
+    }, key;
+    for (key in __obj) obj[key] = __obj[key];
+    return obj;
+  })());
+};
   }
 }));
 (this.require.define({
@@ -13616,52 +13685,6 @@ viewporter.profiles = {
     (function() {
     
       _print(_safe('<div class="order row-fluid">\n  <div class="span5 center">&nbsp;</div>\n  <div class="span1 center">Meat</div>\n  <div class="span2 center">Mushrooms</div>\n  <div class="span2 center">Peppers</div>\n  <div class="span1 center">Olives</div>\n</div>\n<div id="orderList">\n \n</div>  '));
-    
-    }).call(this);
-    
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};
-  }
-}));
-(this.require.define({
-  "views/templates/home": function(exports, require, module) {
-    module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
-  };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
-    };
-    (function() {
-    
-    
     
     }).call(this);
     
@@ -13761,7 +13784,7 @@ viewporter.profiles = {
     };
     (function() {
     
-      _print(_safe(' <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>\n<div class="span1"><input type="checkbox" name="meat"></div>\n<div class="span2"><input type="checkbox" name="mushrooms"></div>\n<div class="span2"><input type="checkbox" name="peppers"></div>\n<div class="span1"><input type="checkbox" name="olives"></div>\n<div class="span1"><a  href="#" class="remove">-</a></div>'));
+      _print(_safe(' <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>\n<div class="span1"><img src="assets/img/pepperoni.png" id="meat" alt="Pepperoni" /></div>\n<div class="span2"><img src="assets/img/mushrooms.png" id="mushrooms" alt="Mushrooms" /></div>\n<div class="span2"><img src="assets/img/peppers.png" id="peppers" alt="Peppers" /></div>\n<div class="span1"><img src="assets/img/olives.png" id="olives" alt="Olives" /></div>\n<div class="span1"><a  href="#" class="remove">-</a></div>'));
     
     }).call(this);
     
@@ -13784,49 +13807,26 @@ viewporter.profiles = {
   }
 }));
 (this.require.define({
-  "collections/OrderCollection": function(exports, require, module) {
+  "helpers": function(exports, require, module) {
     (function() {
-  var OrderModel,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  OrderModel = require('models/OrderModel').OrderModel;
+  exports.BrunchApplication = (function() {
 
-  exports.OrderCollection = (function(_super) {
-
-    __extends(OrderCollection, _super);
-
-    function OrderCollection() {
-      OrderCollection.__super__.constructor.apply(this, arguments);
+    function BrunchApplication() {
+      var _this = this;
+      jQuery(function() {
+        _this.initialize(_this);
+        return Backbone.history.start();
+      });
     }
 
-    OrderCollection.prototype.model = OrderModel;
+    BrunchApplication.prototype.initialize = function() {
+      return null;
+    };
 
-    return OrderCollection;
+    return BrunchApplication;
 
-  })(Backbone.Collection);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "models/OrderModel": function(exports, require, module) {
-    (function() {
-  var __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  exports.OrderModel = (function(_super) {
-
-    __extends(OrderModel, _super);
-
-    function OrderModel() {
-      OrderModel.__super__.constructor.apply(this, arguments);
-    }
-
-    return OrderModel;
-
-  })(Backbone.Model);
+  })();
 
 }).call(this);
 

@@ -1,6 +1,6 @@
  <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>
-<div class="span1"><input type="checkbox" name="meat"></div>
-<div class="span2"><input type="checkbox" name="mushrooms"></div>
-<div class="span2"><input type="checkbox" name="peppers"></div>
-<div class="span1"><input type="checkbox" name="olives"></div>
+<div class="span1"><img src="assets/img/pepperoni.png" id="meat" alt="Pepperoni" /></div>
+<div class="span2"><img src="assets/img/mushrooms.png" id="mushrooms" alt="Mushrooms" /></div>
+<div class="span2"><img src="assets/img/peppers.png" id="peppers" alt="Peppers" /></div>
+<div class="span1"><img src="assets/img/olives.png" id="olives" alt="Olives" /></div>
 <div class="span1"><a  href="#" class="remove">-</a></div>
