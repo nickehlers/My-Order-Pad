@@ -5,6 +5,7 @@ class exports.OrderView extends Backbone.View
         "click .remove": "onRemoveClick"
         "focusout input[name=name]": "onBlur"
         "click input[type=checkbox]": "onChange"
+        "click .topping_icon": "onToppingClick"
 
     initialize: ()->
         @template = require('./templates/order')
@@ -26,7 +27,11 @@ class exports.OrderView extends Backbone.View
         d[$(e.srcElement).attr('name')] = $(e.srcElement).val()
         @model.set( d )
 
-    onChange: (e)->
+    onChange: (e)-> 
         d = []
         d[$(e.srcElement).attr('name')] = $(e.srcElement).is(':checked')
         @model.set( d )
+
+    onToppingClick: (e)->
+        console.log("topping clicked",this, e)
+        $(e.currentTarget).toggleClass('selected')

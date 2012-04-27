@@ -13361,7 +13361,8 @@ viewporter.profiles = {
     OrderView.prototype.events = {
       "click .remove": "onRemoveClick",
       "focusout input[name=name]": "onBlur",
-      "click input[type=checkbox]": "onChange"
+      "click input[type=checkbox]": "onChange",
+      "click .topping_icon": "onToppingClick"
     };
 
     OrderView.prototype.initialize = function() {
@@ -13397,6 +13398,11 @@ viewporter.profiles = {
       d = [];
       d[$(e.srcElement).attr('name')] = $(e.srcElement).is(':checked');
       return this.model.set(d);
+    };
+
+    OrderView.prototype.onToppingClick = function(e) {
+      console.log("topping clicked", this, e);
+      return $(e.currentTarget).toggleClass('selected');
     };
 
     return OrderView;
@@ -13684,7 +13690,7 @@ viewporter.profiles = {
     };
     (function() {
     
-      _print(_safe('<div class="order row-fluid">\n  <div class="span5 center">&nbsp;</div>\n  <div class="span1 center">Meat</div>\n  <div class="span2 center">Mushrooms</div>\n  <div class="span2 center">Peppers</div>\n  <div class="span1 center">Olives</div>\n</div>\n<div id="orderList">\n \n</div>  '));
+      _print(_safe('<div id="orderList">\n \n</div>\n'));
     
     }).call(this);
     
@@ -13784,7 +13790,7 @@ viewporter.profiles = {
     };
     (function() {
     
-      _print(_safe(' <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>\n<div class="span1"><img src="assets/img/pepperoni.png" id="meat" alt="Pepperoni" /></div>\n<div class="span2"><img src="assets/img/mushrooms.png" id="mushrooms" alt="Mushrooms" /></div>\n<div class="span2"><img src="assets/img/peppers.png" id="peppers" alt="Peppers" /></div>\n<div class="span1"><img src="assets/img/olives.png" id="olives" alt="Olives" /></div>\n<div class="span1"><a  href="#" class="remove">-</a></div>'));
+      _print(_safe('<div class="span5" style="height:26px;"><input placeholder="Name" style="width:100%;height:22px;" name="name" /></div>\n<div class="span1"><img src="img/pepperoni.png" class="meat, topping_icon" alt="Pepperoni" /></div>\n<div class="span2"><img src="img/mushrooms.png" class="mushrooms, topping_icon" alt="Mushrooms" /></div>\n<div class="span2"><img src="img/peppers.png" class="peppers, topping_icon" alt="Peppers" /></div>\n<div class="span1"><img src="img/olives.png" class="olives, topping_icon" alt="Olives" /></div>\n<div class="span1"><a href="#" class="remove">-</a></div>\n'));
     
     }).call(this);
     

@@ -1,6 +1,6 @@
- <div class="span5"><input placeholder="Name" style="width:100%"  name="name"> </div>
-<div class="span1"><img src="assets/img/pepperoni.png" id="meat" alt="Pepperoni" /></div>
-<div class="span2"><img src="assets/img/mushrooms.png" id="mushrooms" alt="Mushrooms" /></div>
-<div class="span2"><img src="assets/img/peppers.png" id="peppers" alt="Peppers" /></div>
-<div class="span1"><img src="assets/img/olives.png" id="olives" alt="Olives" /></div>
-<div class="span1"><a  href="#" class="remove">-</a></div>
+<div class="span5" style="height:26px;"><input placeholder="Name" style="width:100%;height:22px;" name="name" /></div>
+<div class="span1"><img src="img/pepperoni.png" class="meat, topping_icon" alt="Pepperoni" /></div>
+<div class="span2"><img src="img/mushrooms.png" class="mushrooms, topping_icon" alt="Mushrooms" /></div>
+<div class="span2"><img src="img/peppers.png" class="peppers, topping_icon" alt="Peppers" /></div>
+<div class="span1"><img src="img/olives.png" class="olives, topping_icon" alt="Olives" /></div>
+<div class="span1"><a href="#" class="remove">-</a></div>

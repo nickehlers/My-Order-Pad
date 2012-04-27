@@ -4082,3 +4082,5 @@ div#head h1{-webkit-box-flex:1;padding:0;margin:0;text-align:center;color:#fff}
 div#content{background-color:#ccc;-webkit-box-flex:1;-webkit-overflow-scrolling:touch;overflow:auto}
 .center{display:block;text-align:center}
 div.order input[type="checkbox"]{margin:0 auto;display:block}
+.topping_icon{width:30px;height:30px;margin:0 auto;display:block;opacity:.5}
+.selected{opacity:1}
